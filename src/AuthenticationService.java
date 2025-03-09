@@ -6,8 +6,9 @@ public class AuthenticationService implements IAuthenticationService {
     private ArrayList<User> users;
 
     // TODO Now: Add a constructor to initialize the users list with the default user
-    public AuthenticationService(ArrayList<User> users) {
-        this.users = users;
+    public AuthenticationService() {
+        users = new ArrayList<User>();
+        users.add(new User("test", "test"));
     }
 
     // TODO Now: Implement the signUp method to add a new user to the list if the username is not taken and return the user; returns null otherwise
@@ -29,7 +30,7 @@ public class AuthenticationService implements IAuthenticationService {
         Iterator i = users.iterator();
         while (i.hasNext()) {
             User currentUser = (User) i.next();
-            if (Objects.equals(username, currentUser.getUsername()) && Objects.equals(password, currentUser.getPassword())) {
+            if (username.equals(currentUser.getUsername()) && password.equals(currentUser.getPassword())) {
                 return currentUser;
             }
         }

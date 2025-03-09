@@ -5,18 +5,20 @@ public class Main {
     // Static list of users, acting as a database
     private static ArrayList<User> users = new ArrayList<>();
 
-    // Mock authentication service that always returns the first user when log in, and does nothing when sign up
-    private static new AuthenticationService(users) = new IAuthenticationService() {
-        @Override
-        public User signUp(String username, String password) {
-            return null;
-        }
+//     Mock authentication service that always returns the first user when log in, and does nothing when sign up
+//    private static IAuthenticationService authService = new IAuthenticationService() {
+//        @Override
+//        public User signUp(String username, String password) {
+//            return null;
+//        }
+//
+//        @Override
+//        public User logIn(String username, String password) {
+//            return users.get(0);
+//        }
+//    };
+    private static IAuthenticationService authService = new AuthenticationService();
 
-        @Override
-        public User logIn(String username, String password) {
-            return users.get(0);
-        }
-    };
     private static boolean isRunning = true;
 
     /**
@@ -78,6 +80,7 @@ public class Main {
         User user = authService.logIn(username, password);
         System.out.println("Welcome, " + user.getUsername() + "!");
         // TODO Later: Add the to-do list operations
+        new ToDoList(user).run();
     }
 
     /**
@@ -91,10 +94,12 @@ public class Main {
         String password = scanner.nextLine();
         User user = authService.signUp(username, password);
         if (user != null) {
-            System.out.println("User" + username + "has been created successfully!");
+            System.out.println("User " + username + " has been created successfully!");
         }
         // TODO Later: Shows a message based on the result
+        else {
         System.out.println("The username is already taken!");
+        }
     }
 
     /**
