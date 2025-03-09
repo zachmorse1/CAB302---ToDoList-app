@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     // Static list of users, acting as a database
     private static ArrayList<User> users = new ArrayList<>();
 
     // Mock authentication service that always returns the first user when log in, and does nothing when sign up
-    private static IAuthenticationService authService = new IAuthenticationService() {
+    private static new AuthenticationService(users) = new IAuthenticationService() {
         @Override
         public User signUp(String username, String password) {
             return null;
